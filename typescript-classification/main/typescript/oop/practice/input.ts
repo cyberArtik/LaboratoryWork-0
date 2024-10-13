@@ -71,30 +71,54 @@ class JsonInput {
 
     private classifyEntities(): void {
         this.entities.forEach(entity => {
-            if (entity.isHumanoid) {
-                if (entity.planet === 'Asgard' && (entity.age === undefined || entity.age <= 5000)) {
+            const isHumanoid = entity.isHumanoid ?? false;
+            const planet = entity.planet ?? ''; 
+            const age = entity.age ?? null; 
+            const traits = entity.traits ?? []; 
+    
+            if (isHumanoid) {
+                // Handle humanoid entities
+                if (planet === 'Asgard' && (age === null || age <= 5000)) {
                     this.universes['Marvel Universe'].push(entity); // Asgardian
-                } else if (entity.planet === 'Betelgeuse' && entity.age !== undefined && entity.age <= 100) {
+                } else if (planet === 'Betelgeuse' && (age === null || age <= 100)) {
                     this.universes['Hitchhiker\'s Universe'].push(entity); // Betelgeusian
-                } else if (entity.planet === 'Earth' && (entity.age === undefined || entity.age <= 200)) {
-                    if (entity.traits?.includes('BLONDE') && entity.traits?.includes('POINTY_EARS')) {
+                } else if (planet === 'Earth' && (age === null || age <= 200)) {
+                    if (traits.includes('BLONDE') && traits.includes('POINTY_EARS')) {
                         this.universes['Lord of the Rings'].push(entity); // Elf
-                    } else if (entity.traits?.includes('SHORT') && entity.traits?.includes('BULKY')) {
+                    } else if (traits.includes('SHORT') && traits.includes('BULKY')) {
                         this.universes['Lord of the Rings'].push(entity); // Dwarf
+                    } else {
+                        this.universes['Marvel Universe'].push(entity); 
+                    }
+                } else if (planet === '') {
+                    if (traits.includes('BLONDE') || traits.includes('TALL')) {
+                        this.universes['Marvel Universe'].push(entity); 
                     }
                 }
             } else {
-                if (entity.planet === 'Kashyyyk' && (entity.age === undefined || (entity.age >= 0 && entity.age <= 400))) {
+                if (planet === 'Kashyyyk' && (age === null || (age >= 0 && age <= 400))) {
                     this.universes['Star Wars'].push(entity); // Wookie
-                } else if (entity.planet === 'Endor' && (entity.age === undefined || (entity.age >= 0 && entity.age <= 60))) {
+                } else if (planet === 'Endor' && (age === null || (age >= 0 && age <= 60))) {
                     this.universes['Star Wars'].push(entity); // Ewok
-                } else if (entity.planet === 'Vogsphere' && (entity.age === undefined || (entity.age >= 0 && entity.age <= 200))) {
-                    this.universes['Hitchhiker\'s Universe'].push(entity); // Vogons
+                } else if (planet === 'Vogsphere' && (age === null || (age >= 0 && age <= 200))) {
+                    this.universes['Hitchhiker\'s Universe'].push(entity); // Vogon
+                } else if (planet === 'Earth' && traits.includes('SHORT') && traits.includes('BULKY')) {
+                    this.universes['Lord of the Rings'].push(entity); // Dwarf entity from Earth
+                } else if (planet === '' && traits.includes('GREEN')) {
+                    this.universes['Hitchhiker\'s Universe'].push(entity); 
+                }
+            }
+    
+            if (planet === '' && age === null && traits.length === 0) {
+                if (isHumanoid) {
+                    this.universes['Marvel Universe'].push(entity); 
+                } else {
+                    this.universes['Star Wars'].push(entity); 
                 }
             }
         });
     }
-
+    
     private printEntities(): void {
         for (const [universe, entities] of Object.entries(this.universes)) {
             console.log(`\nEntities in ${universe}:`);

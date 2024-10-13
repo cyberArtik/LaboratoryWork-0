@@ -10,6 +10,14 @@
     ]
   },
   {
+    "id": 11,
+    "isHumanoid": false,
+    "age": 128,
+    "traits": [
+      "GREEN"
+    ]
+  },
+  {
     "id": 16,
     "isHumanoid": false,
     "planet": "Vogsphere",

@@ -10,6 +10,15 @@
     ]
   },
   {
+    "id": 17,
+    "isHumanoid": true,
+    "age": 154,
+    "traits": [
+      "BLONDE",
+      "TALL"
+    ]
+  },
+  {
     "id": 18,
     "isHumanoid": true,
     "planet": "Asgard",

@@ -1,5 +1,13 @@
 [
   {
+    "id": 4,
+    "planet": "Earth",
+    "traits": [
+      "SHORT",
+      "BULKY"
+    ]
+  },
+  {
     "id": 9,
     "isHumanoid": true,
     "planet": "Earth",

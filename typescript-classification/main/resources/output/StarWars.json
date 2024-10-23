@@ -10,6 +10,15 @@
     ]
   },
   {
+    "id": 3,
+    "isHumanoid": false,
+    "age": 253,
+    "traits": [
+      "HAIRY",
+      "TALL"
+    ]
+  },
+  {
     "id": 10,
     "planet": "Endor",
     "traits": []

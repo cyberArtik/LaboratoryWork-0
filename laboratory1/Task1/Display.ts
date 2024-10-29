@@ -14,7 +14,7 @@ export class Display {
     }
 
     // ---->
-    comparisonArea(other: Display): void {
+    compareSize(other: Display): void {
         console.log(
             (this.width * this.height) > (other.width * other.height)
                 ? `Model: ${this.model} has a larger screen area of ${this.width * this.height}px² than model: ${other.model} with screen area of ${other.width * other.height}px².`
@@ -25,7 +25,7 @@ export class Display {
     }
 
     // ----->
-    public comparisonPPI(other: Display): void {
+    public compareSharpness(other: Display): void {
         console.log(
             this.ppi > other.ppi
                 ? `Model: ${this.model} is sharper (${this.ppi}ppi) than ${other.model} (${other.ppi}ppi)`
@@ -36,9 +36,9 @@ export class Display {
     }
 
     // -----> 
-    public comparisonMonitor(other: Display): void {
-        this.comparisonArea(other);
-        this.comparisonPPI(other);
+    public compareWithMonitor(other: Display): void {
+        this.compareSize(other);
+        this.compareSharpness(other);
     }
 }
 

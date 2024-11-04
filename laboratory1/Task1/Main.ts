@@ -1,4 +1,4 @@
-import { Display } from "./Display";
+import Display from "./Display";
 
 class Program {
     static main() {

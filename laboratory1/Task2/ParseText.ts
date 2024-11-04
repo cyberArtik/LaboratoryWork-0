@@ -1,13 +1,4 @@
 class ParseText {
-    getNumberOfLetters() {
-        throw new Error("Method not implemented.");
-    }
-    getNumberOfConsonants() {
-        throw new Error("Method not implemented.");
-    }
-    getNumberOfVowels() {
-        throw new Error("Method not implemented.");
-    }
     private inputFileName: string | null;
     private inputText: string | null;
     private vowelCount: number;
@@ -75,16 +66,16 @@ class ParseText {
         return this.inputText;
     }
 
-    public getVowelCount(): number {
+    public getNumberOfLetters(): number {
+        return this.letterCount;
+    }
+
+    public getNumberOfVowels(): number {
         return this.vowelCount;
     }
 
-    public getConsonantCount(): number {
+    public getNumberOfConsonants(): number {
         return this.consonantCount;
-    }
-
-    public getLetterCount(): number {
-        return this.letterCount;
     }
 
     public getSentenceCount(): number {

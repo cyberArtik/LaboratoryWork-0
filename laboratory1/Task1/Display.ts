@@ -1,4 +1,4 @@
-export class Display {
+class Display {
     private width: number;
     private height: number;
     private ppi: number;
@@ -41,6 +41,8 @@ export class Display {
         this.compareSharpness(other);
     }
 }
+export default Display;
+
 
 
 

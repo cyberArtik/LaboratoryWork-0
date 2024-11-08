@@ -1,8 +1,8 @@
-import { Coffee } from "./Coffee";
+import Coffee from "./Coffee";
 import { Intensity } from "../EnumCharacteristics/Intensity";
 
 export class Cappuccino extends Coffee {
-    private mlOfMilk: number;
+    protected mlOfMilk: number;
 
     constructor(intensity: Intensity, mlOfMilk: number) {
         super(intensity);

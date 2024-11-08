@@ -1,21 +1,23 @@
 import { Intensity } from "../EnumCharacteristics/Intensity";
 
-export abstract class Coffee {
+abstract class Coffee {
     protected coffeeIntensity: Intensity;
-    protected coffeeName: string;
+    protected coffeeName: string | undefined;
 
     constructor(intensity: Intensity) {
         this.coffeeIntensity = intensity;
-        this.coffeeName = "Coffee";
-    }
-
-    public printCoffeeDetails(): void {
-        console.log(`${this.coffeeName} intensity: ${this.coffeeIntensity}`);
     }
 
     protected makeCoffee(): this {
-        console.log(`Making ${this.coffeeName}`);
+        console.log(`\nMaking ${this.coffeeName}`);
         console.log(`Intensity set to ${this.coffeeIntensity}`);
         return this;
     }
+
+    public printCoffeeDetails(): void {
+        console.log(`${this.coffeeName}`);
+        console.log(`Coffee intensity: ${this.coffeeIntensity}`);
+    }
 }
+
+export default Coffee;

@@ -1,4 +1,4 @@
-import { Coffee } from "./Coffee";
+import Coffee from "./Coffee";
 import { Intensity } from "../EnumCharacteristics/Intensity";
 
 export class Americano extends Coffee {

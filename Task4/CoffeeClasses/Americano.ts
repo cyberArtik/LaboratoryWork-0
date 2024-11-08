@@ -14,4 +14,10 @@ export class Americano extends Coffee {
         super.printCoffeeDetails();
         console.log(`Americano water: ${this.mlOfWater}`);
     }
+
+    public makeAmericano(): this {
+        this.makeCoffee();
+        console.log(`Adding ${this.mlOfWater} mls of water`);
+        return this;
+    }
 }

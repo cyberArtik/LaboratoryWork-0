@@ -1,3 +1,4 @@
+// SyrupCappuccino.ts
 import { Cappuccino } from "./Cappuccino";
 import { Intensity } from "../EnumCharacteristics/Intensity";
 import { SyrupType } from "../EnumCharacteristics/SyrupType";
@@ -7,12 +8,18 @@ export class SyrupCappuccino extends Cappuccino {
 
     constructor(intensity: Intensity, mlOfMilk: number, syrup: SyrupType) {
         super(intensity, mlOfMilk);
-        this.coffeeName = "SyrupCappuccino";
+        this.coffeeName = "Syrup Cappuccino";
         this.syrup = syrup;
     }
 
     public printCoffeeDetails(): void {
         super.printCoffeeDetails();
-        console.log(`Syrup Cappuccino syrup type: ${SyrupType[this.syrup]}`);
+        console.log(`Syrup Cappuccino syrup type: ${this.syrup}`);
+    }
+
+    public makeSyrupCappuccino(): this {
+        this.makeCappuccino();
+        console.log(`Adding some ${this.syrup} syrup`);
+        return this;
     }
 }

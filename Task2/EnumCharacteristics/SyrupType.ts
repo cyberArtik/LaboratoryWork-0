@@ -1,0 +1,8 @@
+export enum SyrupType {
+    MACADAMIA = "MACADAMIA",
+    VANILLA = "VANILLA",
+    COCONUT = "COCONUT",
+    CARAMEL = "CARAMEL",
+    CHOCOLATE = "CHOCOLATE",
+    POPCORN = "POPCORN"
+}

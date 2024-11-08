@@ -1,4 +1,3 @@
-// Main.ts
 import { Intensity } from "./EnumCharacteristics/Intensity";
 import { SyrupType } from "./EnumCharacteristics/SyrupType";
 import { Cappuccino } from "./CoffeeClasses/Cappuccino";

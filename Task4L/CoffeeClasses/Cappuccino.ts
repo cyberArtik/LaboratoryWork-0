@@ -1,3 +1,4 @@
+// Cappuccino.ts
 import Coffee from "./Coffee";
 import { Intensity } from "../EnumCharacteristics/Intensity";
 

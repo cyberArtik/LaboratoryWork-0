@@ -1,5 +1,6 @@
-import { Refuelable } from "../Interfaces/Refuelable";
-import { ServeData } from "./ServeData";
+import { Refuelable } from "./Interfaces/Refuelable";
+import { ServeData } from "./ServerData";
+
 
 export class ElectricStation implements Refuelable {
   refuel(carId: number): void {

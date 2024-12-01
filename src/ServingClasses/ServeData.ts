@@ -1,4 +1,10 @@
 export class ServeData {
+    static ElectricCars(ElectricCars: any) {
+        throw new Error("Method not implemented.");
+    }
+    static AmountDining(AmountDining: any) {
+        throw new Error("Method not implemented.");
+    }
     private static gasCars: number = 0;
     private static electricCars: number = 0;
     private static gasConsumption: number = 0;

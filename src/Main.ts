@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import * as path from "path";
+
 import { ElectricStation } from "./ServingClasses/ElectricStation";
 import { GasStation } from "./ServingClasses/GasStation";
 import { PeopleDinner } from "./ServingClasses/PeopleDinner";
@@ -10,13 +13,20 @@ import { Semaphore } from "./Semaphore";
 import { ParseJson } from "./ParseJson";
 import { Car } from "./Car/Car";
 
-
 const addingCarsToRightStation = (carQueue: LinkedListQueue<Car>, semaphore: Semaphore): void => {
-  const files = ["path/to/json1.json", "path/to/json2.json"]; 
+  const directoryPath = path.join(__dirname, "..", "JSON", "queue");
+
+  const files = fs.readdirSync(directoryPath).filter((file) => file.endsWith(".json"));
+
   files.forEach((file) => {
-    const jsonData = new LinkedListQueue<string>();
-    jsonData.enqueue(file);
-    ParseJson.toCar(jsonData, carQueue);
+    const filePath = path.join(directoryPath, file);
+    const jsonData = fs.readFileSync(filePath, "utf-8");
+    const dataQueue = new LinkedListQueue<string>();
+    dataQueue.enqueue(jsonData);
+
+    ParseJson.toCar(dataQueue, carQueue);
+
+    fs.unlinkSync(filePath);
 
     semaphore.serveCars(carQueue);
   });
@@ -45,8 +55,6 @@ const servingTheCarsFromStations = (carStations: CarStation[]): void => {
 };
 
 const main = (): void => {
-  console.log("Time to deal with some cars...");
-
   const carStations: CarStation[] = [
     new CarStation(new PeopleDinner(), new GasStation(), new LinkedListQueue<Car>()),
     new CarStation(new RobotDinner(), new GasStation(), new LinkedListQueue<Car>()),
@@ -55,10 +63,11 @@ const main = (): void => {
   ];
 
   const semaphore = new Semaphore(carStations);
+
   const carQueue = new LinkedListQueue<Car>();
 
-  setInterval(() => addingCarsToRightStation(carQueue, semaphore), 2000);
-  setInterval(() => servingTheCarsFromStations(carStations), 9000);
+  setInterval(() => addingCarsToRightStation(carQueue, semaphore), 2000); 
+  setInterval(() => servingTheCarsFromStations(carStations), 9000); 
 };
 
 main();

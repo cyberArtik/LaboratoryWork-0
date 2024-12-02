@@ -3,45 +3,153 @@ import { LinkedListQueue } from "../src/QueueClasses/LinkedListQueue";
 import { CircularQueue } from "../src/QueueClasses/CircularQueue";
 import { Queue } from "../src/QueueClasses/Queue";
 
-import { describe, test, expect, beforeEach } from "@jest/globals";
+describe("Queue Custom Tests", () => {
+  const testData = [1, 2, 3, 4, 5];
 
-
-describe("Queue Tests", () => {
-  const actualData = [1, 2, 3, 4, 5, 5, 4];
-
-  const enqueueAllValues = (testQueueImplementation: Queue<number>) => {
-    actualData.forEach((value) => testQueueImplementation.enqueue(value));
+  // Helper function to enqueue data into a queue
+  const enqueueAllValues = (queue: Queue<number>): void => {
+    testData.forEach((value) => queue.enqueue(value));
   };
 
-  const queueImplementationsForTest = [
-    new SimpleQueue<number>(),
-    new LinkedListQueue<number>(),
-    new CircularQueue<number>(10),
-  ];
+  it("should enqueue values correctly", () => {
+    const simpleQueue = new SimpleQueue<number>();
+    enqueueAllValues(simpleQueue);
+    expect(simpleQueue.size()).toBe(testData.length);
+  });
 
-  queueImplementationsForTest.forEach((queueImplementation) => {
-    test("Enqueue values", () => {
-      enqueueAllValues(queueImplementation);
-      expect(queueImplementation.size()).toBe(actualData.length);
-    });
+  it("should enqueue values correctly in LinkedListQueue", () => {
+    const linkedListQueue = new LinkedListQueue<number>();
+    enqueueAllValues(linkedListQueue);
+    expect(linkedListQueue.size()).toBe(testData.length);
+  });
 
-    test("Dequeue values", () => {
-      enqueueAllValues(queueImplementation);
+  it("should enqueue values correctly in CircularQueue", () => {
+    const circularQueue = new CircularQueue<number>(5);
+    enqueueAllValues(circularQueue);
+    expect(circularQueue.size()).toBe(testData.length);
+  });
 
-      const dequeuedTestData: number[] = [];
-      while (queueImplementation.size() > 0) {
-        const element = queueImplementation.dequeue();
-        if (element !== null) dequeuedTestData.push(element);
-      }
+  it("should dequeue values in the correct order", () => {
+    const simpleQueue = new SimpleQueue<number>();
+    enqueueAllValues(simpleQueue);
 
-      expect(dequeuedTestData).toEqual(actualData);
-    });
+    const dequeuedData: number[] = [];
+    while (simpleQueue.size() > 0) {
+      const value = simpleQueue.dequeue();
+      if (value !== null) dequeuedData.push(value);
+    }
 
-    test("Peek value", () => {
-      enqueueAllValues(queueImplementation);
-      const firstValue = queueImplementation.peek();
-      expect(firstValue).toBe(actualData[0]);
-    });
+    expect(dequeuedData).toEqual(testData); 
+  });
+
+  it("should dequeue values in the correct order in LinkedListQueue", () => {
+    const linkedListQueue = new LinkedListQueue<number>();
+    enqueueAllValues(linkedListQueue);
+
+    const dequeuedData: number[] = [];
+    while (linkedListQueue.size() > 0) {
+      const value = linkedListQueue.dequeue();
+      if (value !== null) dequeuedData.push(value);
+    }
+
+    expect(dequeuedData).toEqual(testData);
+  });
+
+  it("should dequeue values in the correct order in CircularQueue", () => {
+    const circularQueue = new CircularQueue<number>(5);
+    enqueueAllValues(circularQueue);
+
+    const dequeuedData: number[] = [];
+    while (circularQueue.size() > 0) {
+      const value = circularQueue.dequeue();
+      if (value !== null) dequeuedData.push(value);
+    }
+
+    expect(dequeuedData).toEqual(testData);
+  });
+
+  it("should peek the front element correctly", () => {
+    const simpleQueue = new SimpleQueue<number>();
+    enqueueAllValues(simpleQueue);
+    expect(simpleQueue.peek()).toBe(testData[0]);
+  });
+
+  it("should peek the front element correctly in LinkedListQueue", () => {
+    const linkedListQueue = new LinkedListQueue<number>();
+    enqueueAllValues(linkedListQueue);
+    expect(linkedListQueue.peek()).toBe(testData[0]);
+  });
+
+  it("should peek the front element correctly in CircularQueue", () => {
+    const circularQueue = new CircularQueue<number>(5);
+    enqueueAllValues(circularQueue);
+    expect(circularQueue.peek()).toBe(testData[0]);
+  });
+
+  // size function
+  it("should return the correct size of the queue", () => {
+    const simpleQueue = new SimpleQueue<number>();
+    enqueueAllValues(simpleQueue);
+    expect(simpleQueue.size()).toBe(testData.length); 
+  });
+
+  it("should return the correct size in LinkedListQueue", () => {
+    const linkedListQueue = new LinkedListQueue<number>();
+    enqueueAllValues(linkedListQueue);
+    expect(linkedListQueue.size()).toBe(testData.length);
+  });
+
+  it("should return the correct size in CircularQueue", () => {
+    const circularQueue = new CircularQueue<number>(5);
+    enqueueAllValues(circularQueue);
+    expect(circularQueue.size()).toBe(testData.length);
+  });
+
+  it("should return null for dequeue when the queue is empty", () => {
+    const emptyQueue = new SimpleQueue<number>();
+    expect(emptyQueue.dequeue()).toBeNull(); 
+  });
+
+  it("should return null for peek when the queue is empty", () => {
+    const emptyQueue = new SimpleQueue<number>();
+    expect(emptyQueue.peek()).toBeNull(); 
+  });
+
+  it("should return null for dequeue when the LinkedListQueue is empty", () => {
+    const emptyQueue = new LinkedListQueue<number>();
+    expect(emptyQueue.dequeue()).toBeNull();
+  });
+
+  it("should return null for peek when the LinkedListQueue is empty", () => {
+    const emptyQueue = new LinkedListQueue<number>();
+    expect(emptyQueue.peek()).toBeNull();
+  });
+
+  it("should return null for dequeue when the CircularQueue is empty", () => {
+    const emptyQueue = new CircularQueue<number>(5);
+    expect(emptyQueue.dequeue()).toBeNull();
+  });
+
+  it("should return null for peek when the CircularQueue is empty", () => {
+    const emptyQueue = new CircularQueue<number>(5);
+    expect(emptyQueue.peek()).toBeNull();
+  });
+
+  it("should throw an error when CircularQueue is full", () => {
+    const circularQueue = new CircularQueue<number>(3); 
+    circularQueue.enqueue(1);
+    circularQueue.enqueue(2);
+    circularQueue.enqueue(3);
+    expect(() => circularQueue.enqueue(4)).toThrowError("Queue is full.");
+  });
+
+  it("should wrap around and allow enqueue after dequeue in CircularQueue", () => {
+    const circularQueue = new CircularQueue<number>(3);
+    circularQueue.enqueue(1);
+    circularQueue.enqueue(2);
+    circularQueue.enqueue(3);
+    circularQueue.dequeue(); 
+    circularQueue.enqueue(4); 
+    expect(circularQueue.peek()).toBe(2);
   });
 });
-

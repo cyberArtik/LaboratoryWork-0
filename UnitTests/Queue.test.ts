@@ -3,7 +3,7 @@ import { LinkedListQueue } from "../src/QueueClasses/LinkedListQueue";
 import { CircularQueue } from "../src/QueueClasses/CircularQueue";
 import { Queue } from "../src/QueueClasses/Queue";
 
-import test, { beforeEach, describe } from "node:test";
+import { describe, test, expect, beforeEach } from "@jest/globals";
 
 
 describe("Queue Tests", () => {
@@ -44,7 +44,4 @@ describe("Queue Tests", () => {
     });
   });
 });
-function expect(arg0: number) {
-    throw new Error("Function not implemented.");
-}
 

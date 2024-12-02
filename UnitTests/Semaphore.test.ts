@@ -7,7 +7,8 @@ import { LinkedListQueue } from "../src/QueueClasses/LinkedListQueue";
 import { Semaphore } from "../src/Semaphore";
 import { ParseJson } from "../src/ParseJson";
 import { Car } from "../src/Car/Car";
-import test, { beforeEach, describe } from "node:test";
+import { describe, test, expect, beforeEach } from "@jest/globals";
+import { ServeData } from "../src/ServingClasses/ServeData";
 
 
 describe("Semaphore Tests", () => {
@@ -27,8 +28,10 @@ describe("Semaphore Tests", () => {
     const expectedQueue = new LinkedListQueue<Car>();
 
     jsonData.forEach((data) => {
-      ParseJson.toCar(new LinkedListQueue<string>().enqueue(data), carQueueTest);
-    });
+      const queue = new LinkedListQueue<string>();
+      queue.enqueue(data);
+      ParseJson.toCar(queue, carQueueTest);
+     });
 
     expectedQueue.enqueue(new Car(1, "GAS", "PEOPLE", false, 17));
     expectedQueue.enqueue(new Car(2, "ELECTRIC", "PEOPLE", true, 35));
@@ -56,8 +59,10 @@ describe("Semaphore Tests", () => {
     const jsonData = [jsonCar1, jsonCar2, jsonCar3, jsonCar4];
 
     jsonData.forEach((data) => {
-      ParseJson.toCar(new LinkedListQueue<string>().enqueue(data), carQueueTest);
-    });
+      const queue = new LinkedListQueue<string>();
+      queue.enqueue(data);
+      ParseJson.toCar(queue, carQueueTest); 
+   });
 
     semaphore.serveCars(carQueueTest);
 

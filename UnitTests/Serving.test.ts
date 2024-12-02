@@ -3,6 +3,7 @@ import { PeopleDinner } from "../src/ServingClasses/PeopleDinner";
 import { ElectricStation } from "../src/ServingClasses/ElectricStation";
 import { GasStation } from "../src/ServingClasses/GasStation";
 import { ServeData } from "../src/ServingClasses/ServeData";
+import { describe, test, expect, beforeEach } from "@jest/globals";
 
 describe("Serving Tests", () => {
   let robotDinner: RobotDinner;
@@ -11,8 +12,8 @@ describe("Serving Tests", () => {
   let gasStation: GasStation;
 
   beforeEach(() => {
-    robotDinner = new RobotsDiner();
-    peopleDinner = new PeopleDiner();
+    robotDinner = new RobotDinner();
+    peopleDinner = new PeopleDinner();
     electricStation = new ElectricStation();
     gasStation = new GasStation();
   });

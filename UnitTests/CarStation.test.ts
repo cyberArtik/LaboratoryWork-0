@@ -4,9 +4,13 @@ import { CircularQueue } from "../src/QueueClasses/CircularQueue";
 import { LinkedListQueue } from "../src/QueueClasses/LinkedListQueue";
 import { Car } from "../src/Car/Car";
 import { CarStation } from "../src/CarStation";
-import test, { beforeEach, describe } from "node:test";
 import { PeopleDinner } from "../src/ServingClasses/PeopleDinner";
 import { RobotDinner } from "../src/ServingClasses/RobotDinner";
+
+import { describe, test, expect, beforeEach } from "@jest/globals";
+
+
+
 describe("CarStation Tests", () => {
   let stationPeopleElectric: CarStation;
   let stationRobotsElectric: CarStation;
@@ -36,7 +40,5 @@ describe("CarStation Tests", () => {
     expect(simpleQueue.size()).toBe(0);
   });
 });
-function expect(arg0: number) {
-    throw new Error("Function not implemented.");
-}
+
 
